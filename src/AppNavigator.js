@@ -27,7 +27,7 @@ import UserProfileScreen from './screens/mainScreens/UserProfileScreen';
 import SearchScreen from './screens/mainScreens/SearchScreen';
 import TravelPlansScreen from './screens/mainScreens/TravelPlansScreen';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
+import SignInScreen from './screens/authScreens/SignInScreen';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -44,25 +44,26 @@ const TabNavigator = () => (
 
 
 const MainStackNavigator = () => (
-  <Stack.Navigator>
+  <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='Welcome'>
     {/* <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} /> */}
     {/* <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} /> */}
-    <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-    {/* <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
-    <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} options={{ headerShown: false }} />
-    <Stack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} />
-    <Stack.Screen name="UserProfile" component={UserProfileScreen} />
-    <Stack.Screen name="Chat" component={ChatScreen} />
-    <Stack.Screen name="GroupTravel" component={GroupTravelScreen} />
-    <Stack.Screen name="Settings" component={SettingsScreen} />
-    <Stack.Screen name="EditProfile" component={EditProfileScreen} />
-    <Stack.Screen name="TravelDetails" component={TravelDetailsScreen} />
-    <Stack.Screen name="Travelers" component={TravelersScreen} />
-    <Stack.Screen name="ProfileSettings" component={ProfileSettingsScreen} />
-    <Stack.Screen name="Notification" component={NotificationScreen} />
-    <Stack.Screen name="Destinations" component={DestinationsScreen} />
-    <Stack.Screen name="Discover" component={DiscoverScreen} />
-    <Stack.Screen name="Filter" component={FilterScreen} /> */}
+    {/* <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} /> */}
+    {/* <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }}/> */}
+    <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} /> 
+    {/* <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} options={{ headerShown: false }} /> */}
+    {/* <Stack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} /> */}
+    {/* <Stack.Screen name="UserProfile" component={UserProfileScreen} /> */}
+    {/* <Stack.Screen name="Chat" component={ChatScreen} /> */}
+    {/* <Stack.Screen name="GroupTravel" component={GroupTravelScreen} /> */}
+    {/* <Stack.Screen name="Settings" component={SettingsScreen} /> */}
+    {/* <Stack.Screen name="EditProfile" component={EditProfileScreen} /> */}
+    {/* <Stack.Screen name="TravelDetails" component={TravelDetailsScreen} /> */}
+    {/* <Stack.Screen name="Travelers" component={TravelersScreen} /> */}
+    {/* <Stack.Screen name="ProfileSettings" component={ProfileSettingsScreen} /> */}
+    {/* <Stack.Screen name="Notification" component={NotificationScreen} /> */}
+    {/* <Stack.Screen name="Destinations" component={DestinationsScreen} /> */}
+    {/* <Stack.Screen name="Discover" component={DiscoverScreen} /> */}
+    {/* <Stack.Screen name="Filter" component={FilterScreen} /> */}
   </Stack.Navigator>
 );
 
