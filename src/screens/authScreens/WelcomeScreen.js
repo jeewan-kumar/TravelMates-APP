@@ -21,14 +21,14 @@ const WelcomeScreen = ({ navigation }) => {
         <View style={styles.buttonContainer}>
           <Button
             title="Login with Email"
-            onPress={() => navigation.navigate("Login")}
+            onPress={() => navigation.navigate("SignIn")}
             style={styles.btn}
           />
           <View style={styles.bottomContainer}>
             <Text style={styles.bottomText}>
               Don’t have an account?
             </Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+            <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
               <Text style={styles.bottomLink}>
                 Sign Up
               </Text>
@@ -48,27 +48,26 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
     paddingHorizontal: 20,
   },
   centerContent: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   logo: {
     width: '60%',
     height: height * 0.25,
     resizeMode: 'contain',
-    marginBottom: 20,
+   
   },
   title: {
     color: '#fff',
     fontSize: 26,
     textAlign: 'center',
-    marginVertical: 10,
     fontWeight: 'bold',
+    marginTop: -50,
   },
   subtitle: {
     color: '#fff',
@@ -86,6 +85,7 @@ const styles = StyleSheet.create({
   btn: {
     width: '80%',
     marginVertical: 10,
+    fontWeight:'bold',
   },
   bottomContainer: {
     flexDirection: 'row',
@@ -96,11 +96,13 @@ const styles = StyleSheet.create({
   bottomText: {
     color: 'white',
     fontSize: 16,
+    
   },
   bottomLink: {
     color: '#FFD700',
     fontSize: 16,
     marginLeft: 5,
+    fontWeight:'bold'
   },
 });
 
