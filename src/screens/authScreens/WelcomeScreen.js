@@ -1,3 +1,110 @@
+import { Image, ImageBackground, StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native'
+import React from 'react'
+import Button from '../../components/Button'
+
+const { width, height } = Dimensions.get('window');
+
+const WelcomeScreen = ({ navigation }) => {
+  return (
+    <View style={styles.container}>
+      <ImageBackground
+        source={require('../../images/background.png')}
+        style={styles.background}
+      >
+        <View style={styles.centerContent}>
+          <Image source={require('../../images/Logo.png')} style={styles.logo} />
+          <Text style={styles.title}>Start your journey today!</Text>
+          <Text style={styles.subtitle}>
+            Connect with fellow travelers, explore new destinations, and plan unforgettable adventures together. Start your journey today!
+          </Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Login with Email"
+            onPress={() => navigation.navigate("Login")}
+            style={styles.btn}
+          />
+          <View style={styles.bottomContainer}>
+            <Text style={styles.bottomText}>
+              Don’t have an account?
+            </Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+              <Text style={styles.bottomLink}>
+                Sign Up
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ImageBackground>
+    </View>
+  )
+}
+
+export default WelcomeScreen
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  background: {
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
+  centerContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logo: {
+    width: '60%',
+    height: height * 0.25,
+    resizeMode: 'contain',
+    marginBottom: 20,
+  },
+  title: {
+    color: '#fff',
+    fontSize: 26,
+    textAlign: 'center',
+    marginVertical: 10,
+    fontWeight: 'bold',
+  },
+  subtitle: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center',
+    marginVertical: 10,
+    paddingHorizontal: 30,
+    lineHeight: 22,
+  },
+  buttonContainer: {
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 40,
+  },
+  btn: {
+    width: '80%',
+    marginVertical: 10,
+  },
+  bottomContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 12,
+  },
+  bottomText: {
+    color: 'white',
+    fontSize: 16,
+  },
+  bottomLink: {
+    color: '#FFD700',
+    fontSize: 16,
+    marginLeft: 5,
+  },
+});
+
+
 // import React from 'react';
 // import { View, Text, TouchableOpacity, StyleSheet, Image, Linking } from 'react-native';
 // import { useNavigation } from '@react-navigation/native';
@@ -145,141 +252,141 @@
 // export default WelcomeScreen;
 
 
-import React from "react";
-import { Image, StyleSheet, View, Text, TouchableOpacity, Dimensions } from "react-native";
-import { useNavigation } from '@react-navigation/native';
+// import React from "react";
+// import { Image, StyleSheet, View, Text, TouchableOpacity, Dimensions } from "react-native";
+// import { useNavigation } from '@react-navigation/native';
 
-const WelcomeScreen = () => {
-  const navigation = useNavigation();
+// const WelcomeScreen = () => {
+//   const navigation = useNavigation();
 
-  const handleLoginPress = () => {
-    navigation.navigate('Login');
-  };
+//   const handleLoginPress = () => {
+//     navigation.navigate('Login');
+//   };
 
-  const handleSignupPress = () => {
-    navigation.navigate('SignUp');
-  };
+//   const handleSignupPress = () => {
+//     navigation.navigate('SignUp');
+//   };
 
-  return (
-    <View style={styles.container}>
-      <Image
-        style={styles.backgroundImage}
-        resizeMode="cover"
-        source={require("../../images/background.png")}
-      />
-      <View style={styles.contentContainer}>
-        <View style={styles.logoContainer}>
-          <Image
-            style={styles.logoIcon}
-            resizeMode="cover"
-            source={require("../../images/LogoImg.png")}
-          />
-          <View style={styles.textContainer}>
-            <Text style={styles.welcomeText}>Welcome to TravelMates!</Text>
-            <Text style={styles.descriptionText}>
-              Connect with fellow travelers, explore new destinations, and plan unforgettable adventures together. Start your journey today!
-            </Text>
-          </View>
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={handleLoginPress}>
-            <Text style={styles.buttonText}>Login With Email</Text>
-          </TouchableOpacity>
-          <View style={styles.signupContainer} >
-            <Text style={styles.signupText}>Don’t have an account? </Text>
-            <TouchableOpacity onPress={handleSignupPress}>
-            <Text style={[styles.signupText, styles.signupLink]}>Sign Up</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    </View>
-  );
-};
+//   return (
+//     <View style={styles.container}>
+//       <Image
+//         style={styles.backgroundImage}
+//         resizeMode="cover"
+//         source={require("../../images/background.png")}
+//       />
+//       <View style={styles.contentContainer}>
+//         <View style={styles.logoContainer}>
+//           <Image
+//             style={styles.logoIcon}
+//             resizeMode="cover"
+//             source={require("../../images/LogoImg.png")}
+//           />
+//           <View style={styles.textContainer}>
+//             <Text style={styles.welcomeText}>Welcome to TravelMates!</Text>
+//             <Text style={styles.descriptionText}>
+//               Connect with fellow travelers, explore new destinations, and plan unforgettable adventures together. Start your journey today!
+//             </Text>
+//           </View>
+//         </View>
+//         <View style={styles.buttonContainer}>
+//           <TouchableOpacity style={styles.button} onPress={handleLoginPress}>
+//             <Text style={styles.buttonText}>Login With Email</Text>
+//           </TouchableOpacity>
+//           <View style={styles.signupContainer} >
+//             <Text style={styles.signupText}>Don’t have an account? </Text>
+//             <TouchableOpacity onPress={handleSignupPress}>
+//             <Text style={[styles.signupText, styles.signupLink]}>Sign Up</Text>
+//             </TouchableOpacity>
+//           </View>
+//         </View>
+//       </View>
+//     </View>
+//   );
+// };
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+// const windowWidth = Dimensions.get('window').width;
+// const windowHeight = Dimensions.get('window').height;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backgroundImage: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-  },
-  contentContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: windowWidth * 0.05,
-  },
-  logoContainer: {
-    flex: 6,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logoIcon: {
-    width: windowWidth * 0.8,
-    height: windowHeight * 0.3,
-    marginBottom: 20,
-  },
-  textContainer: {
-    alignItems: 'center',
-    marginBottom: windowHeight * 0.05,
-  },
-  welcomeText: {
-    fontSize: windowWidth * 0.07,
-    fontWeight: '700',
-    color: '#ffffff',
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-  descriptionText: {
-    fontSize: windowWidth * 0.04,
-    fontWeight: '500',
-    color: '#ffffff',
-    textAlign: 'center',
-  },
-  buttonContainer: {
-    alignItems: 'center',
-    marginBottom: windowHeight * 0.03,
-    flex: 1,
-    width: '100%',
-  },
-  button: {
-    backgroundColor: '#2f4f4f',
-    width: windowWidth * 0.7,
-    height: windowHeight * 0.07,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    marginBottom: windowHeight * 0.03,
-  },
-  buttonText: {
-    color: '#ffffff',
-    fontSize: windowWidth * 0.05,
-    fontWeight: '500',
-  },
-  signupContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: windowHeight * 0.01,
-  },
-  signupText: {
-    color: '#ffffff',
-    fontWeight: '400',
-    fontSize: windowWidth * 0.04,
-  },
-  signupLink: {
-    fontWeight: '700',
-    marginLeft: 5,
-    fontSize: windowWidth * 0.04,
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#FFFFFF',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+//   backgroundImage: {
+//     width: '100%',
+//     height: '100%',
+//     position: 'absolute',
+//   },
+//   contentContainer: {
+//     flex: 1,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     paddingHorizontal: windowWidth * 0.05,
+//   },
+//   logoContainer: {
+//     flex: 6,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   logoIcon: {
+//     width: windowWidth * 0.8,
+//     height: windowHeight * 0.3,
+//     marginBottom: 20,
+//   },
+//   textContainer: {
+//     alignItems: 'center',
+//     marginBottom: windowHeight * 0.05,
+//   },
+//   welcomeText: {
+//     fontSize: windowWidth * 0.07,
+//     fontWeight: '700',
+//     color: '#ffffff',
+//     textAlign: 'center',
+//     marginBottom: 10,
+//   },
+//   descriptionText: {
+//     fontSize: windowWidth * 0.04,
+//     fontWeight: '500',
+//     color: '#ffffff',
+//     textAlign: 'center',
+//   },
+//   buttonContainer: {
+//     alignItems: 'center',
+//     marginBottom: windowHeight * 0.03,
+//     flex: 1,
+//     width: '100%',
+//   },
+//   button: {
+//     backgroundColor: '#2f4f4f',
+//     width: windowWidth * 0.7,
+//     height: windowHeight * 0.07,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     borderRadius: 10,
+//     marginBottom: windowHeight * 0.03,
+//   },
+//   buttonText: {
+//     color: '#ffffff',
+//     fontSize: windowWidth * 0.05,
+//     fontWeight: '500',
+//   },
+//   signupContainer: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     marginBottom: windowHeight * 0.01,
+//   },
+//   signupText: {
+//     color: '#ffffff',
+//     fontWeight: '400',
+//     fontSize: windowWidth * 0.04,
+//   },
+//   signupLink: {
+//     fontWeight: '700',
+//     marginLeft: 5,
+//     fontSize: windowWidth * 0.04,
+//   },
+// });
 
-export default WelcomeScreen;
+// export default WelcomeScreen;

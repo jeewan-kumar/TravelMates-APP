@@ -50,7 +50,7 @@ const SplashScreen = () => {
       <Image
         style={styles.logo}
         resizeMode="contain"
-        source={require('../../images/LogoImg.png')}
+        source={require('../../images/Logo.png')}
       />
     </View>
   );
@@ -63,8 +63,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   logo: {
-    width: '50%',
-    height: '50%',
+    width: '90%',
+    height: '90%',
     position: 'absolute',
     alignSelf: 'center',
   },
