@@ -1,155 +1,343 @@
-// import React, { useState } from 'react';
-// import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-// import { ScrollView } from 'react-native-gesture-handler';
-// import { SafeAreaView } from 'react-native-safe-area-context';
-// import { useNavigation } from '@react-navigation/native';
-// import Input from '../../components/Input';
+// import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+// import Input from '../../components/Input'
+// import Icon from 'react-native-vector-icons/FontAwesome';
+// import Ionicons from 'react-native-vector-icons/Ionicons';
+// import { useState } from 'react';
+// import Button from '../../components/Button';
 
-// const SignUpScreen = () => {
-//   const [isLoading, setIsLoading] = useState(false);
-//   const navigation = useNavigation();
+// const SignUpScreen = ({navigation}) => {
+
+//   const [isLoading, setIsLoading]= useState(false)
+
+//   const authHandler= () => {
+//     console.log('authHandler');
+//   }
+
+//   return (
+//     <SafeAreaView style={{flex:1,backgroundColor: '#2f4f4f',}}>
+//       <ScrollView style={{flex:1,backgroundColor: '#2f4f4f', padding: 16}}>
+//         <Image source={require("../../images/Logo.png")}
+//           style={{width: 100, height: 100, marginLeft:-22,marginTop:50}}
+//         />
+//         <Text style={styles.signUpText}>Sign Up</Text>
+//         <Text style={styles.signUpDescription}>
+//         Sign up now for free and start connecting with like-minded travelers. Explore new adventures with TravelMates today!
+//         </Text>
+//        <View style={{marginVertical:30}}>
+
+//           <Input
+
+//             id="full_Name"
+//             placeholder="Full Name"
+//             placeholderTextColor="white"
+//             leftIcon={<Icon name='user' type='FontAwesome'/>}
+//             onInputChanged={handleInputChanged}
+//             errorText={formState.inputValidaties["fullName"]}
+//           />
+//           <Input
+//             id="email"
+//             placeholder="Email Address"
+//             placeholderTextColor="white"
+//             // onInputChanged={handleInputChanged}
+//           />
+//           <Input
+//             id="phone_number"
+//             placeholder="Phone number"
+//             placeholderTextColor="white"
+//             // onInputChanged={handleInputChanged}
+//           />
+//           <Input
+//             id="date_of_birth"
+//             placeholder="Date Of Birth"
+//             placeholderTextColor="white"
+//             // onInputChanged={handleInputChanged}
+//           />
+
+//           <Input
+//           id="password"
+//           placeholder="Password"
+//           placeholderTextColor="white"
+//           // secureTextEntry={true}
+//           // onInputChanged={handleInputChanged}
+//         />
+//           <Input
+//             id="password"
+//             placeholder="Conform Password"
+//             placeholderTextColor="white"
+//             // secureTextEntry={true}
+//             // onInputChanged={handleInputChanged}
+//           />
+
+//        </View>
+
+//        <View style={styles.buttonContainer}>
+//           <Button
+//             title="Sign Up"
+//             onPress={() => navigation.navigate("SignIn")}
+//             style={styles.btn}
+//           />
+//           <View style={styles.bottomContainer}>
+//             <Text style={styles.bottomText}>
+//               Already Have an account?
+//             </Text>
+//             <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
+//               <Text style={styles.bottomLink}>
+//                 Sign In
+//               </Text>
+//             </TouchableOpacity>
+//           </View>
+//         </View>
+
+
+//       </ScrollView>
+//     </SafeAreaView>
+//   )
+// }
+// export default SignUpScreen
+// const styles = StyleSheet.create({
+//   signUpText:{
+//     color:'white',
+//     fontSize: 30,
+//     fontWeight:"bold"
+
+//   },
+//   signUpDescription:{
+//     color:'silver',
+//     fontSize: 15,
+//     textAlign:"justify"
+
+//   },
+//   btn: {
+//     width: '80%',
+//     marginVertical: 10,
+//     fontWeight:'bold',
+//   },
+//   buttonContainer: {
+//     width: '100%',
+//     alignItems: 'center',
+//     marginBottom: 40,
+//   },
+//   bottomContainer: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     marginVertical: 12,
+//   },
+//   bottomText: {
+//     color: 'white',
+//     fontSize: 16,
+
+//   },
+//   bottomLink: {
+//     color: '#FFD700',
+//     fontSize: 16,
+//     marginLeft: 5,
+//     fontWeight:'bold'
+//   },
+// })
+
+// import React, { useState, useCallback } from 'react';
+// import { Image, ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+// import Input from '../../components/Input';
+// import Icon from 'react-native-vector-icons/FontAwesome';
+// import Button from '../../components/Button';
+
+// const SignUpScreen = ({ navigation }) => {
+//   const [fullName, setFullName] = useState('');
+//   const [email, setEmail] = useState('');
+//   const [phoneNumber, setPhoneNumber] = useState('');
+//   const [dateOfBirth, setDateOfBirth] = useState('');
+//   const [password, setPassword] = useState('');
+//   const [confirmPassword, setConfirmPassword] = useState('');
+
+//   const [fullNameError, setFullNameError] = useState(false);
+//   const [emailError, setEmailError] = useState(false);
+//   const [phoneNumberError, setPhoneNumberError] = useState(false);
+//   const [dateOfBirthError, setDateOfBirthError] = useState(false);
+//   const [passwordError, setPasswordError] = useState(false);
+//   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+
+//   const handleInputChanged = useCallback((inputId, inputValue) => {
+//     let isValid = true;
+
+//     switch (inputId) {
+//       case 'full_Name':
+//         setFullName(inputValue);
+//         setFullNameError(inputValue.trim() === '');
+//         break;
+//       case 'email':
+//         isValid = /\S+@\S+\.\S+/.test(inputValue);
+//         setEmailError(!isValid);
+//         setEmail(inputValue);
+//         break;
+//       case 'phone_number':
+//         isValid = /^\d{10}$/.test(inputValue);
+//         setPhoneNumberError(!isValid);
+//         setPhoneNumber(inputValue);
+//         break;
+//       case 'date_of_birth':
+//         setDateOfBirth(inputValue);
+//         setDateOfBirthError(inputValue.trim() === '');
+//         break;
+//       case 'password':
+//         isValid = inputValue.trim().length >= 6;
+//         setPasswordError(!isValid);
+//         setPassword(inputValue);
+//         break;
+//       case 'confirmPassword':
+//         isValid = inputValue === password;
+//         setConfirmPasswordError(!isValid);
+//         setConfirmPassword(inputValue);
+//         break;
+//       default:
+//         break;
+//     }
+//   }, [password]);
 
 //   const authHandler = () => {
-//     console.log('authHandler');
-//     // Perform authentication logic here
-//   };
-
-//   const handleInputChanged = (id, text) => {
-//     console.log(`Input ${id} changed to ${text}`);
-//   };
-
-//   const handleWelcomeScreenPress = () => {
-//     // Navigate to WelcomeScreen or perform desired action
-//     console.log('Navigate to WelcomeScreen or perform action');
+//     if (
+//       fullNameError ||
+//       emailError ||
+//       phoneNumberError ||
+//       dateOfBirthError ||
+//       passwordError ||
+//       confirmPasswordError ||
+//       !fullName ||
+//       !email ||
+//       !phoneNumber ||
+//       !dateOfBirth ||
+//       !password ||
+//       !confirmPassword
+//     ) {
+//       alert('Please fill all fields correctly!');
+//       return;
+//     }
+//     console.log('authHandler', { fullName, email, phoneNumber, dateOfBirth, password, confirmPassword });
 //   };
 
 //   return (
-//     <SafeAreaView style={styles.container}>
-//       <ScrollView contentContainerStyle={styles.scroll}>
-//         <View style={styles.logoContainer}>
-//           <Image 
-//             source={require("../../images/Logo.png")}
-//             style={styles.logoImage}
-//             resizeMode="contain"
-//           />
-//           <Text style={styles.signUpText}>Sign Up</Text>
-//           <Text style={styles.signUpDescription}>
-//             Sign up now for free and start connecting with like-minded travelers. Explore new adventures with TravelMates today!
-//           </Text>
-//         </View>
-        
-//         <View style={styles.inputField}>
+//     <SafeAreaView style={{ flex: 1, backgroundColor: '#2f4f4f' }}>
+//       <ScrollView style={{ flex: 1, backgroundColor: '#2f4f4f', padding: 16 }}>
+//         <Image
+//           source={require("../../images/Logo.png")}
+//           style={{ width: 100, height: 100, marginLeft: -22, marginTop: 50 }}
+//         />
+//         <Text style={styles.signUpText}>Sign Up</Text>
+//         <Text style={styles.signUpDescription}>
+//           Sign up now for free and start connecting with like-minded travelers. Explore new adventures with TravelMates today!
+//         </Text>
+//         <View style={{ marginVertical: 10 }}>
 //           <Input
-//             id="firstName"
-//             placeholder="First Name"
+//             id="full_Name"
+//             placeholder="Full Name"
 //             placeholderTextColor="white"
+//             leftIcon={<Icon name='user' type='FontAwesome' />}
 //             onInputChanged={handleInputChanged}
-//           />
-//           <Input
-//             id="lastName"
-//             placeholder="Last Name"
-//             placeholderTextColor="white"
-//             onInputChanged={handleInputChanged}
+//             errorText={fullNameError && 'Please enter a valid full name.'}
 //           />
 //           <Input
 //             id="email"
 //             placeholder="Email Address"
 //             placeholderTextColor="white"
 //             onInputChanged={handleInputChanged}
+//             errorText={emailError && 'Please enter a valid email address.'}
 //           />
 //           <Input
-//             id="mobileNo"
-//             placeholder="Mobile Number"
+//             id="phone_number"
+//             placeholder="Phone number"
 //             placeholderTextColor="white"
 //             onInputChanged={handleInputChanged}
+//             errorText={phoneNumberError && 'Please enter a valid phone number.'}
+//           />
+//           <Input
+//             id="date_of_birth"
+//             placeholder="Date Of Birth"
+//             placeholderTextColor="white"
+//             onInputChanged={handleInputChanged}
+//             errorText={dateOfBirthError && 'Please enter your date of birth.'}
 //           />
 //           <Input
 //             id="password"
 //             placeholder="Password"
 //             placeholderTextColor="white"
-           
+//             secureTextEntry
 //             onInputChanged={handleInputChanged}
+//             errorText={passwordError && 'Password must be at least 6 characters long.'}
 //           />
-//           <TouchableOpacity style={styles.signUpButton} onPress={handleWelcomeScreenPress}>
-//             <Text style={styles.signUpButtonText}>Sign Up</Text>
-//           </TouchableOpacity>
-          
+//           <Input
+//             id="confirmPassword"
+//             placeholder="Confirm Password"
+//             placeholderTextColor="white"
+//             secureTextEntry
+//             onInputChanged={handleInputChanged}
+//             errorText={confirmPasswordError && 'Passwords do not match.'}
+//           />
+//         </View>
+
+//         <View style={styles.buttonContainer}>
+//           <Button
+//             title="Sign Up"
+//             onPress={authHandler}
+//             style={styles.btn}
+//           />
 //           <View style={styles.bottomContainer}>
-//             <Text style={{ color: "white" }}>Already have an account?</Text>
-//             <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-//               <Text style={styles.loginText}>Sign In</Text>
+//             <Text style={styles.bottomText}>
+//               Already Have an account?
+//             </Text>
+//             <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
+//               <Text style={styles.bottomLink}>
+//                 Sign In
+//               </Text>
 //             </TouchableOpacity>
 //           </View>
-//           <Image
-//         style={styles.backgroundImage}
-//         resizeMode="cover"
-//         source={require("../../images/backgroundimg.png")}
-//       />
+
 //         </View>
+
 //       </ScrollView>
 //     </SafeAreaView>
 //   );
 // };
 
+// export default SignUpScreen;
+
 // const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#2f4f4f',
-//   },
-//   scroll: {
-//     flexGrow: 1,
-//     padding: 16,
-//     justifyContent: 'space-between', 
-//   },
-//   logoContainer: {
-//     alignItems: 'center',
-   
-//   },
-//   logoImage: {
-//     width: 200,
-//     height: 200,
-//     marginBottom: -10,
-//     marginLeft:-300,
-//   },
 //   signUpText: {
-//     color: '#ffffff',
-//     fontWeight: 'bold',
+//     color: 'white',
 //     fontSize: 30,
-//     marginTop: -40,
-//     marginLeft:-280
+//     fontWeight: "bold"
 //   },
 //   signUpDescription: {
-//     color: '#C0C0C0',
-//     textAlign: 'center',
+//     color: 'silver',
 //     fontSize: 15,
+//     textAlign: "justify"
+//   },
+//   btn: {
+//     width: '80%',
 //     marginVertical: 10,
-//   },
-//   signUpButton: {
-//     backgroundColor: '#5F9EA0',
-//     width: '70%', // Button width set to 70% of parent container
-//     paddingVertical: 12,
-//     paddingHorizontal: 24,
-//     borderRadius: 8,
-//     alignSelf: 'center',
-//     marginTop: 30,
-//   },
-//   signUpButtonText: {
-//     color: 'white',
 //     fontWeight: 'bold',
-//     fontSize: 16,
-//     textAlign: 'center',
+//   },
+//   buttonContainer: {
+//     width: '100%',
+//     alignItems: 'center',
+//     marginBottom: 40,
 //   },
 //   bottomContainer: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     justifyContent: "center",
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     justifyContent: 'center',
 //     marginVertical: 12,
 //   },
-//   loginText: {
+//   bottomText: {
 //     color: 'white',
-//     fontWeight: 'bold',
+//     fontSize: 16,
+//   },
+//   bottomLink: {
+//     color: '#FFD700',
+//     fontSize: 16,
 //     marginLeft: 5,
-//   }, backgroundImage: {
+//     fontWeight: 'bold'
+//   },
+//   backgroundImage: {
 //     position: 'absolute',
 //     bottom: 0,
 //     width: '100%',
@@ -158,219 +346,228 @@
 //   },
 // });
 
-// export default SignUpScreen;
-// SignUpScreen.js
-
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useCallback } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, ImageBackground } from 'react-native';
 import Input from '../../components/Input';
+import Button from '../../components/Button';
 
-const SignUpScreen = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+const SignUpScreen = ({ navigation }) => {
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
-  const [mobileNo, setMobileNo] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
   const [password, setPassword] = useState('');
-  const navigation = useNavigation();
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleInputChanged = (id, text) => {
-    switch (id) {
-      case 'firstName':
-        setFirstName(text);
-        break;
-      case 'lastName':
-        setLastName(text);
-        break;
+  const [fullNameError, setFullNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [phoneNumberError, setPhoneNumberError] = useState(false);
+  const [dateOfBirthError, setDateOfBirthError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+
+  const handleInputChanged = useCallback((inputId, inputValue) => {
+    let isValid = true;
+
+    switch (inputId) {
       case 'email':
-        setEmail(text);
+        isValid = /\S+@\S+\.\S+/.test(inputValue);
+        setEmailError(!isValid);
+        setEmail(inputValue);
         break;
-      case 'mobileNo':
-        setMobileNo(text);
+      case 'phone_number':
+        isValid = /^\d{10}$/.test(inputValue);
+        setPhoneNumberError(!isValid);
+        setPhoneNumber(inputValue);
         break;
       case 'password':
-        setPassword(text);
+        isValid = inputValue.trim().length >= 6;
+        setPasswordError(!isValid);
+        setPassword(inputValue);
+        break;
+      case 'confirmPassword':
+        isValid = inputValue === password;
+        setConfirmPasswordError(!isValid);
+        setConfirmPassword(inputValue);
+        break;
+      case 'full_Name':
+        setFullName(inputValue);
+        setFullNameError(inputValue.trim() === '');
+        break;
+      case 'date_of_birth':
+        setDateOfBirth(inputValue);
+        setDateOfBirthError(inputValue.trim() === '');
         break;
       default:
         break;
     }
-  };
+  }, [password]);
 
-  const isValidForm = () => {
-    return firstName.trim() !== '' &&
-           lastName.trim() !== '' &&
-           email.trim() !== '' &&
-           mobileNo.trim() !== '' &&
-           password.trim() !== '';
-  };
-
-  const handleWelcomeScreenPress = () => {
-    // Validate the form
-    if (!isValidForm()) {
-      Alert.alert('Error', 'Please fill in all fields.');
+  const authHandler = () => {
+    if (
+      fullNameError ||
+      emailError ||
+      phoneNumberError ||
+      dateOfBirthError ||
+      passwordError ||
+      confirmPasswordError ||
+      !fullName ||
+      !email ||
+      !phoneNumber ||
+      !dateOfBirth ||
+      !password ||
+      !confirmPassword
+    ) {
+      alert('Please fill all fields correctly!');
       return;
     }
-
-    // Perform authentication logic here (e.g., API call)
-    console.log('Authentication initiated...');
-    console.log('First Name:', firstName);
-    console.log('Last Name:', lastName);
-    console.log('Email:', email);
-    console.log('Mobile Number:', mobileNo);
-    console.log('Password:', password);
-
-    // Example: Navigate to WelcomeScreen after successful authentication
-    navigation.navigate('WelcomeScreen');
+    console.log('authHandler', { fullName, email, phoneNumber, dateOfBirth, password, confirmPassword });
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scroll}>
-        <View style={styles.logoContainer}>
-          <Image 
-            source={require("../../images/Logo.png")}
-            style={styles.logoImage}
-            resizeMode="contain"
-          />
-          <Text style={styles.signUpText}>Sign Up</Text>
-          <Text style={styles.signUpDescription}>
-            Sign up now for free and start connecting with like-minded travelers. Explore new adventures with TravelMates today!
-          </Text>
-        </View>
-        
-        <View style={styles.inputField}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#2f4f4f' }}>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <Image
+          source={require("../../images/Logo.png")}
+          style={{ width: 100, height: 100, marginLeft: -22, marginTop: 50 }}
+        />
+        <Text style={styles.signUpText}>Sign Up</Text>
+        <Text style={styles.signUpDescription}>
+          Sign up now for free and start connecting with like-minded travelers. Explore new adventures with TravelMates today!
+        </Text>
+        <View style={{ marginVertical: 30 }}>
           <Input
-            id="firstName"
-            placeholder="First Name"
+            id="full_Name"
+            placeholder="Full Name"
             placeholderTextColor="white"
-            value={firstName}
+            leftIcon="user"
             onInputChanged={handleInputChanged}
-            required
-          />
-          <Input
-            id="lastName"
-            placeholder="Last Name"
-            placeholderTextColor="white"
-            value={lastName}
-            onInputChanged={handleInputChanged}
-            required
+            errorText={fullNameError && 'Please enter a valid full name.'}
+            style={styles.input}
+            
           />
           <Input
             id="email"
             placeholder="Email Address"
             placeholderTextColor="white"
-            value={email}
+            leftIcon="envelope"
             onInputChanged={handleInputChanged}
-            required
+            errorText={emailError && 'Please enter a valid email address.'}
+            style={styles.input}
           />
           <Input
-            id="mobileNo"
-            placeholder="Mobile Number"
+            id="phone_number"
+            placeholder="Phone number"
             placeholderTextColor="white"
-            value={mobileNo}
+            leftIcon="phone"
             onInputChanged={handleInputChanged}
-            required
+            errorText={phoneNumberError && 'Please enter a valid phone number.'}
+            style={styles.input}
+          />
+          <Input
+            id="date_of_birth"
+            placeholder="Date Of Birth"
+            placeholderTextColor="white"
+            leftIcon="calendar"
+            onInputChanged={handleInputChanged}
+            errorText={dateOfBirthError && 'Please enter your date of birth.'}
+            style={styles.input}
           />
           <Input
             id="password"
             placeholder="Password"
             placeholderTextColor="white"
-            value={password}
+            leftIcon="lock"
             secureTextEntry
             onInputChanged={handleInputChanged}
-            required
+            errorText={passwordError && 'Password must be at least 6 characters long.'}
+            style={styles.input}
           />
-          <TouchableOpacity style={styles.signUpButton} onPress={handleWelcomeScreenPress}>
-            <Text style={styles.signUpButtonText}>Sign Up</Text>
-          </TouchableOpacity>
-          
+          <Input
+            id="confirmPassword"
+            placeholder="Confirm Password"
+            placeholderTextColor="white"
+            leftIcon="lock"
+            secureTextEntry
+            onInputChanged={handleInputChanged}
+            errorText={confirmPasswordError && 'Passwords do not match.'}
+            style={styles.input}
+          />
+        </View>
+
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Sign Up"
+            onPress={authHandler}
+            style={styles.btn}
+          />
           <View style={styles.bottomContainer}>
-            <Text style={{ color: "white" }}>Already have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-              <Text style={styles.loginText}>Sign In</Text>
+            <Text style={styles.bottomText}>
+              Already Have an account?
+            </Text>
+            <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
+              <Text style={styles.bottomLink}>
+                Sign In
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
-
-        {/* Background Image */}
-        <Image
-          style={styles.backgroundImage}
-          resizeMode="cover"
-          source={require("../../images/backgroundimg.png")}
-        />
       </ScrollView>
+      <View style={styles.bottomHalf} />
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  scrollView: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: 50, // Adjust this value to fit the content properly
+  },
+  signUpText: {
+    color: 'white',
+    fontSize: 30,
+    fontWeight: "bold",
+  },
+  signUpDescription: {
+    color: 'silver',
+    fontSize: 15,
+    textAlign: "justify",
+  },
+  btn: {
+    width: '80%',
+    marginVertical: 10,
+    fontWeight: 'bold',
+  },
+  buttonContainer: {
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 40,
+  },
+  bottomContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 12,
+  },
+  bottomText: {
+    color: 'white',
+    fontSize: 16,
+  },
+  bottomLink: {
+    color: '#FFD700',
+    fontSize: 16,
+    marginLeft: 5,
+    fontWeight: 'bold'
+  },
+  bottomHalf: {
     flex: 1,
     backgroundColor: '#2f4f4f',
   },
-  scroll: {
-    flexGrow: 1,
-    padding: 16,
-    justifyContent: 'space-between', 
-  },
-  logoContainer: {
-    alignItems: 'center',
-  },
-  logoImage: {
-    width: 200,
-    height: 200,
-    marginBottom: -10,
-  },
-  signUpText: {
-    color: '#ffffff',
-    fontWeight: 'bold',
-    fontSize: 30,
-    marginTop: -40,
-  },
-  signUpDescription: {
-    color: '#C0C0C0',
-    textAlign: 'center',
-    fontSize: 15,
+  input: {
+    width: '80%',
     marginVertical: 10,
-  },
-  inputField: {
-    marginTop: 20,
-    marginBottom: 20, // Added bottom margin for spacing
-  },
-  signUpButton: {
-    backgroundColor: '#5F9EA0',
-    width: '70%', // Button width set to 70% of parent container
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-    alignSelf: 'center',
-    marginTop: 30,
-  },
-  signUpButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 16,
-    textAlign: 'center',
-  },
-  bottomContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 12,
-  },
-  loginText: {
-    color: 'white',
-    fontWeight: 'bold',
-    marginLeft: 5,
-  },
-  backgroundImage: {
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    height: '50%',
-    opacity: 0.3,
   },
 });
 

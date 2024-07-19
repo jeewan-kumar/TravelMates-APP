@@ -3,57 +3,56 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Ale
 import Input from '../../components/Input'; // Adjust the path as needed
 import Button from '../../components/Button';
 
-const ForgotPasswordScreen = () => {
-  const [emailOrPhone, setEmailOrPhone] = useState('');
+const VerifyOtpScreen = ({ route, navigation }) => {
+//   const { emailOrPhone } = route.params;
+  const [otp, setOtp] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleForgotPassword = () => {
+  const handleVerifyOtp = () => {
     setIsLoading(true);
 
-    const emailRegex = /^\S+@\S+\.\S+$/;
-    const phoneRegex = /^\d{10}$/;
-    const isEmail = emailRegex.test(emailOrPhone);
-    const isPhone = phoneRegex.test(emailOrPhone);
-
-    if (!isEmail && !isPhone) {
-      Alert.alert('Error', 'Please enter a valid email address or phone number.');
+    if (!otp) {
+      Alert.alert('Error', 'Please enter the OTP.');
       setIsLoading(false);
       return;
     }
 
-    // Call your API to request a password reset link/code
-    console.log('Requesting password reset for:', emailOrPhone);
-    // Example: fetch('https://your-api.com/forgot-password', { method: 'POST', body: JSON.stringify({ emailOrPhone }) })
+    // Call your API to verify OTP
+    console.log('Verifying OTP for:', emailOrPhone);
+    console.log('OTP:', otp);
+    // Example: fetch('https://your-api.com/verify-otp', { method: 'POST', body: JSON.stringify({ emailOrPhone, otp }) })
 
     // Simulate success
     setTimeout(() => {
-      Alert.alert('Success', 'A password reset link/code has been sent to your email/phone.');
+      Alert.alert('Success', 'OTP verified successfully.');
       setIsLoading(false);
+      navigation.navigate('ResetPassword', { emailOrPhone });
     }, 2000);
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        <Text style={styles.title}>Forgot Password</Text>
+        <Text style={styles.title}>Verify OTP</Text>
         <Text style={styles.description}>
-          Enter your email address or phone number to receive a password reset link or code.
+          Enter the OTP sent to your email address or phone number.
         </Text>
 
         <Input
-          id="emailOrPhone"
-          placeholder="Email or Phone Number"
+          id="otp"
+          placeholder="OTP"
           placeholderTextColor="white"
-          leftIcon="user"
-          onInputChanged={(id, text) => setEmailOrPhone(text)}
-          value={emailOrPhone}
+          leftIcon="lock"
+          keyboardType="numeric"
+          onInputChanged={(id, text) => setOtp(text)}
+          value={otp}
           style={styles.input}
         />
 
         <View style={styles.buttonContainer}>
           <Button
-            title="Send Reset Link/Code"
-            onPress={handleForgotPassword}
+            title="Verify OTP"
+            onPress={handleVerifyOtp}
             disabled={isLoading}
             style={styles.btn}
           />
@@ -100,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ForgotPasswordScreen;
+export default VerifyOtpScreen;

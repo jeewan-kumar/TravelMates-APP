@@ -28,6 +28,12 @@ import SearchScreen from './screens/mainScreens/SearchScreen';
 import TravelPlansScreen from './screens/mainScreens/TravelPlansScreen';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SignInScreen from './screens/authScreens/SignInScreen';
+import ResetPasswordScreen from './screens/authScreens/ResetPasswordScreen';
+import VerifyOtpScreen from './screens/authScreens/VerifyOtpScreen';
+import VerificationScreen from './screens/authScreens/VerificationScreen';
+
+
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -46,11 +52,14 @@ const TabNavigator = () => (
 const MainStackNavigator = () => (
   <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='Welcome'>
     {/* <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} /> */}
-    <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
+    {/* <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} /> */}
     {/* <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} /> */}
     {/* <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }}/> */}
-    {/* <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />  */}
+    <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} /> 
     {/* <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} options={{ headerShown: false }} /> */}
+    {/* <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} options={{ headerShown: false }} /> */}
+    {/* <Stack.Screen name="VerifyOtpScreen" component={VerifyOtpScreen} options={{ headerShown: false }} /> */}
+    {/* <Stack.Screen name="VerificationScreen" component={VerificationScreen} options={{ headerShown: false}}/> */}
     {/* <Stack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} /> */}
     {/* <Stack.Screen name="UserProfile" component={UserProfileScreen} /> */}
     {/* <Stack.Screen name="Chat" component={ChatScreen} /> */}
