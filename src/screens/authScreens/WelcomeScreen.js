@@ -20,10 +20,15 @@ const WelcomeScreen = ({ navigation }) => {
         </View>
         <View style={styles.buttonContainer}>
           <Button
-            title="Login with Email"
+            title="SignIn with Password Or Otp"
             onPress={() => navigation.navigate("SignIn")}
             style={styles.btn}
           />
+          {/* <Button
+            title="SignIn with Otp"
+            onPress={() => navigation.navigate("SignInwithOtp")}
+            style={styles.btn}
+          /> */}
           <View style={styles.bottomContainer}>
             <Text style={styles.bottomText}>
               Don’t have an account?

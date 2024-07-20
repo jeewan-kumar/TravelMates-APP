@@ -18,7 +18,7 @@ const VerifyOtpScreen = ({ route, navigation }) => {
     }
 
     // Call your API to verify OTP
-    console.log('Verifying OTP for:', emailOrPhone);
+    // console.log('Verifying OTP for:', emailOrPhone);
     console.log('OTP:', otp);
     // Example: fetch('https://your-api.com/verify-otp', { method: 'POST', body: JSON.stringify({ emailOrPhone, otp }) })
 
@@ -26,7 +26,8 @@ const VerifyOtpScreen = ({ route, navigation }) => {
     setTimeout(() => {
       Alert.alert('Success', 'OTP verified successfully.');
       setIsLoading(false);
-      navigation.navigate('ResetPassword', { emailOrPhone });
+      // navigation.navigate('ResetPasswordScreen', { emailOrPhone });
+      navigation.navigate('ResetPasswordScreen');
     }, 2000);
   };
 

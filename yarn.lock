@@ -1201,6 +1201,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@react-native-async-storage/async-storage@^1.24.0":
+  version "1.24.0"
+  resolved "https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-1.24.0.tgz"
+  integrity sha512-W4/vbwUOYOjco0x3toB8QCr7EjIP6nE9G7o8PMguvvjYT5Awg09lyV4enACRx4s++PPulBiBSjL0KTFx2u0Z/g==
+  dependencies:
+    merge-options "^3.0.4"
+
 "@react-native-community/cli-clean@13.6.9":
   version "13.6.9"
   dependencies:
@@ -2412,6 +2419,8 @@ dayjs@^1.8.15:
 
 debug@^2.2.0:
   version "2.6.9"
+  resolved "https://registry.npmjs.org/debug/-/debug-2.6.9.tgz"
+  integrity sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==
   dependencies:
     ms "2.0.0"
 
@@ -2935,6 +2944,14 @@ follow-redirects@^1.15.6:
   resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.15.6.tgz"
   integrity sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==
 
+follow-redirects@0.0.7:
+  version "0.0.7"
+  resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-0.0.7.tgz"
+  integrity sha512-RxpX808lAA4IZ2cNqzRedcsPfVuo2AJEL8mmGvGeN0KGLJWZf5fidmUkcB0DWUCrmLD+GAQ0J2WOBORw8BS/Uw==
+  dependencies:
+    debug "^2.2.0"
+    stream-consume "^0.1.0"
+
 for-each@^0.3.3:
   version "0.3.3"
   dependencies:
@@ -3290,6 +3307,11 @@ is-number@^7.0.0:
 
 is-path-inside@^3.0.3:
   version "3.0.3"
+
+is-plain-obj@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/is-plain-obj/-/is-plain-obj-2.1.0.tgz"
+  integrity sha512-YWnfyRwxL/+SsrWYfOpUtz5b3YD+nyfkHvjbcanzk8zgyO4ASD67uVMRt8k5bM4lLMDnXfriRhOpemw+NfT1eA==
 
 is-plain-object@^2.0.4:
   version "2.0.4"
@@ -3912,6 +3934,13 @@ marky@^1.2.2:
 memoize-one@^5.0.0:
   version "5.2.1"
 
+merge-options@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.npmjs.org/merge-options/-/merge-options-3.0.4.tgz"
+  integrity sha512-2Sug1+knBjkaMsMgf1ctR1Ujx+Ayku4EdJN4Z+C2+JzoeF7A3OZ9KM2GY0CpQS51NR61LTurMJrRKPhSs3ZRTQ==
+  dependencies:
+    is-plain-obj "^2.1.0"
+
 merge-stream@^2.0.0:
   version "2.0.0"
 
@@ -4120,6 +4149,8 @@ mkdirp@^1.0.4:
 
 ms@2.0.0:
   version "2.0.0"
+  resolved "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz"
+  integrity sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==
 
 ms@2.1.2:
   version "2.1.2"
@@ -4504,6 +4535,13 @@ react-is@^16.7.0:
 react-is@^17.0.1:
   version "17.0.2"
 
+react-native-axios@^0.17.1:
+  version "0.17.1"
+  resolved "https://registry.npmjs.org/react-native-axios/-/react-native-axios-0.17.1.tgz"
+  integrity sha512-HQO5RB6+SYMYX6ckXPkzGtIC2H7LVdRrXhB6IVrUNj+QpJH9rWVDeKM51juvvhPBQtXJjB1vORWPrQhvnYOvMA==
+  dependencies:
+    follow-redirects "0.0.7"
+
 react-native-gesture-handler@^2.17.1, "react-native-gesture-handler@>= 1.0.0":
   version "2.17.1"
   resolved "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.17.1.tgz"
@@ -4556,7 +4594,7 @@ react-native-vector-icons@^10.1.0:
     prop-types "^15.7.2"
     yargs "^16.1.1"
 
-react-native@*, react-native@>=0.65.0, react-native@0.74.3:
+react-native@*, "react-native@^0.0.0-0 || >=0.60 <1.0", react-native@>=0.65.0, react-native@0.74.3:
   version "0.74.3"
   dependencies:
     "@jest/create-cache-key-function" "^29.6.3"
@@ -4988,6 +5026,11 @@ statuses@~1.5.0:
 
 statuses@2.0.1:
   version "2.0.1"
+
+stream-consume@^0.1.0:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/stream-consume/-/stream-consume-0.1.1.tgz"
+  integrity sha512-tNa3hzgkjEP7XbCkbRXe1jpg+ievoa0O4SCFlMOYEscGSS4JJsckGL8swUyAa/ApGU3Ae4t6Honor4HhL+tRyg==
 
 strict-uri-encode@^2.0.0:
   version "2.0.0"
