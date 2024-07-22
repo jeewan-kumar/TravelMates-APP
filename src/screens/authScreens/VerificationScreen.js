@@ -4,8 +4,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import axios from 'axios';
 
-const BASE_URL = 'http://192.168.33.157:5164/TravelMates_Users'; // Replace with your actual base URL
-
+const BASE_URL = 'http://192.168.33.157:5164/TravelMates_Users'; 
 const VerificationScreen = ({ route, navigation }) => {
   
   const { user_id, emailotp_id, phoneotp_id } = route.params || {};
@@ -33,8 +32,7 @@ const VerificationScreen = ({ route, navigation }) => {
 
     try {
       const response = await axios.post(`${BASE_URL}`, params);
-      console.log('VerifyOTP Response:', response.data); // Print full response data
-
+      console.log('VerifyOTP Response:', response.data); 
       if (response.data.rStatus === 0 && response.data.rData.rCode === 0) {
         Alert.alert('Success', response.data.rData.rMessage);
         navigation.navigate('Home');

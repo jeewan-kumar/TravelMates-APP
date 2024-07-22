@@ -152,6 +152,8 @@ import VerifyOtpScreen from './screens/authScreens/VerifyOtpScreen';
 import VerificationScreen from './screens/authScreens/VerificationScreen';
 import SignInwithOtp from './screens/authScreens/SignInwithOtp';
 import { AuthProvider } from './services/AuthContext';
+import ChatListScreen from './screens/mainScreens/ChatListScreen';
+import ChatDetailScreen from './screens/mainScreens/ChatDetailScreen';
 
 // Create navigators
 const Stack = createStackNavigator();
@@ -185,7 +187,7 @@ const TabNavigator = () => (
     />
     <Tab.Screen
       name="Chat"
-      component={ChatScreen}
+      component={ChatListScreen}
       options={{
         tabBarLabel: 'Chat',
         tabBarIcon: () => <Icon name="comment" size={25} />,
@@ -204,7 +206,7 @@ const TabNavigator = () => (
 
 // Main stack navigator
 const MainStackNavigator = () => (
-  <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Welcome">
+  <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Splash">
     <Stack.Screen name="Splash" component={SplashScreen} />
     <Stack.Screen name="Welcome" component={WelcomeScreen} />
     <Stack.Screen name="SignIn" component={SignInScreen} />
@@ -226,6 +228,7 @@ const MainStackNavigator = () => (
     <Stack.Screen name="Destinations" component={DestinationsScreen} />
     <Stack.Screen name="Discover" component={DiscoverScreen} />
     <Stack.Screen name="Filter" component={FilterScreen} />
+    <Stack.Screen name="ChatDetailScreen" component={ChatDetailScreen} />
   </Stack.Navigator>
 );
 

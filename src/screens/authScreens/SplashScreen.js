@@ -1,45 +1,32 @@
+import React, { useContext, useEffect } from 'react';
+import { Image, StyleSheet, View, ActivityIndicator } from 'react-native';
+import { AuthContext } from '../../services/AuthContext';
 
-// import React, { useEffect } from 'react';
-// import { View, Image, StyleSheet,Text } from 'react-native';
+const SplashScreen = ({ navigation }) => {
+  const { splashLoading, userInfo } = useContext(AuthContext);
 
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      try {
+        if (!splashLoading) {
+          setTimeout(() => {
+            if (userInfo) {
+              const identifier = userInfo.email || userInfo.phone_number;
+              navigation.navigate('Home', { identifier });
+            } else {
+              navigation.navigate('SignIn');
+            }
+          }, 1000); 
+        }
+      } catch (e) {
+        console.error('Failed to load auth status', e);
+        navigation.navigate('SignIn');
+      }
+    };
 
-// const SplashScreen = ({ navigation }) => {
-//   // Use useEffect to navigate to the next screen after a certain time
-//   useEffect(() => {
-//     const timer = setTimeout(() => {
-//       // Navigate to your main screen or initial screen after 2 seconds
-//       navigation.replace('Home'); // Replace with your actual screen name
-//     }, 2000); // 2000 milliseconds = 2 seconds
+    checkAuthStatus();
+  }, [navigation, splashLoading, userInfo]);
 
-//     return () => clearTimeout(timer); // Clear the timer on unmounting
-//   }, [navigation]);
-
-//   return (
-//     <View style={styles.container}>
-//      <Text>Heel</Text>
-//     </View>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#fff', // Adjust background color as per your design
-//   },
-//   logo: {
-//     width: 200, // Adjust width and height as per your logo/image dimensions
-//     height: 200,
-//     resizeMode: 'contain', // Adjust resizeMode as per your image aspect ratio
-//   },
-// });
-
-// export default SplashScreen;
-import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
-
-const SplashScreen = () => {
   return (
     <View style={styles.splashScreen}>
       <Image
@@ -52,6 +39,9 @@ const SplashScreen = () => {
         resizeMode="contain"
         source={require('../../images/Logo.png')}
       />
+      {splashLoading && (
+        <ActivityIndicator size="large" color="#0000ff" style={styles.loading} />
+      )}
     </View>
   );
 };
@@ -73,6 +63,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  loading: {
+    position: 'absolute',
+    top: '50%',
+    alignSelf: 'center',
   },
 });
 

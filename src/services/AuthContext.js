@@ -20,7 +20,7 @@
 //                 phone_number:phoneNumber,
 //                 date_of_birth:dateOfBirth,
 //                 password:password
-                
+
 //             }
 //         };
 //         try {
@@ -75,7 +75,7 @@
 
 //     const signIn = async (identifier, password, isEmailLogin = true) => {
 //         setIsLoading(true);
-      
+
 //         try {
 //           const params = {
 //             eventID: "1001",
@@ -84,15 +84,15 @@
 //               password: password,
 //             },
 //           };
-      
+
 //           const response = await axios.post(`${BASE_URL}skillup_UserSignIn`, params);
 //           const userInfo = response.data;
-      
+
 //           if (userInfo.rData && userInfo.rData.rCode === 1) {
 //             setIsLoading(false);
 //             return { success: false, message: userInfo.rData.rMessage };
 //           }
-      
+
 //         //   console.log(userInfo, 'api response');
 //           setUserInfo(userInfo);
 //           await AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
@@ -105,7 +105,7 @@
 //           return { success: false, message: error.message };
 //         }
 //       };
-      
+
 
 //     const logout = async () => {
 //         setIsLoading(true);
@@ -180,10 +180,10 @@ export const AuthProvider = ({ children }) => {
             eventID: "1001",
             addInfo: {
                 full_name: fullName,
-                email:email,
+                email: email,
                 phone_number: phoneNumber,
                 date_of_birth: dateOfBirth,
-                password:password
+                password: password
             }
         };
         try {
@@ -216,7 +216,9 @@ export const AuthProvider = ({ children }) => {
             }
         };
         try {
-            const response = await axios.post(`${BASE_URL}skillup_UserSignIn`, params);
+            console.log('signIn OTP with params:', params);
+            const response = await axios.post(`${BASE_URL}TravelMates_SignIn`, params);
+            console.log('signIn Response:', response.data);
             const userInfo = response.data;
             if (userInfo.rData && userInfo.rData.rCode === 1) {
                 setIsLoading(false);
@@ -232,6 +234,133 @@ export const AuthProvider = ({ children }) => {
             return { success: false, message: error.message };
         }
     };
+
+    const sendOtp = async (identifier, isEmailLogin = true) => {
+        setIsLoading(true);
+        const params = {
+            eventID: "1002",
+            addInfo: {
+                [isEmailLogin ? 'email' : 'phone_number']: identifier
+            }
+        };
+
+        try {
+            console.log('Sending OTP with params:', params);
+            const response = await axios.post(`${BASE_URL}TravelMates_SignIn`, params);
+            console.log('sendOtp Response:', response.data);
+            const userInfo = response.data;
+
+            if (userInfo.rData && userInfo.rData.rCode === 1) {
+                setIsLoading(false);
+                return { success: false, message: userInfo.rData.rMessage };
+            }
+
+            setUserInfo(userInfo);
+            await AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+            setIsLoading(false);
+            return { success: true };
+        } catch (error) {
+            console.error(`Error sending OTP: ${error}`);
+            setIsLoading(false);
+            return { success: false, message: error.message };
+        }
+    };
+
+
+    const verifyOtp = async (identifier, otp, isEmailLogin = true) => {
+        setIsLoading(true);
+        const params = {
+            eventID: "1003",
+            addInfo: {
+                [isEmailLogin ? 'email' : 'phone_number']: identifier,
+                otp
+            }
+        };
+        try {
+            console.log('verifyOtp OTP with params:', params);
+            const response = await axios.post(`${BASE_URL}TravelMates_SignIn`, params);
+            console.log('verifyOtp Response:', response.data);
+            const userInfo = response.data;
+            if (userInfo.rData && userInfo.rData.rCode === 1) {
+                setIsLoading(false);
+                return { success: false, message: userInfo.rData.rMessage };
+            }
+            setUserInfo(userInfo);
+            await AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+            setIsLoading(false);
+            return { success: true };
+        } catch (error) {
+            console.error(`Sign in failed: ${error}`);
+            setIsLoading(false);
+            return { success: false, message: error.message };
+        }
+    };
+
+    const forgotPassword = async (identifier, isEmailLogin = true) => {
+        setIsLoading(true);
+        const params = {
+            eventID: "1004",
+            addInfo: {
+                [isEmailLogin ? 'email' : 'phone_number']: identifier
+            }
+        };
+
+        try {
+            console.log('Sending OTP with params:', params);
+            const response = await axios.post(`${BASE_URL}TravelMates_SignIn`, params);
+            console.log('sendOtp Response:', response.data);
+           
+            const userInfo = response.data;
+
+            if (userInfo.rData && userInfo.rData.rCode === 1) {
+                setIsLoading(false);
+                
+                return { success: false, message: userInfo.rData.rMessage };
+            }
+
+            setUserInfo(userInfo);
+            await AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+            setIsLoading(false);
+            return { success: true , user_Id: userInfo.rData.user_Id };
+        } catch (error) {
+            console.error(`Error sending OTP: ${error}`);
+            setIsLoading(false);
+            return { success: false, message: error.message };
+        }
+    };
+
+    const verifyOtpForForgotPassword = async (identifier, otp, user_id, isEmailLogin = true) => {
+        setIsLoading(true);
+        const params = {
+            eventID: "1005",
+            addInfo: {
+                user_id, // Include user_id
+                [isEmailLogin ? 'email' : 'phone_number']: identifier,
+                otp
+            }
+        };
+        try {
+            console.log('verifyOtp OTP with params:', params);
+            const response = await axios.post(`${BASE_URL}TravelMates_SignIn`, params);
+            console.log('verifyOtp Response:', response.data);
+            const userInfo = response.data;
+            if (userInfo.rData && userInfo.rData.rCode === 1) {
+                setIsLoading(false);
+                return { success: false, message: userInfo.rData.rMessage };
+            }
+            setUserInfo(userInfo);
+            await AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+            setIsLoading(false);
+            return { success: true };
+        } catch (error) {
+            console.error(`Sign in failed: ${error}`);
+            setIsLoading(false);
+            return { success: false, message: error.message };
+        }
+    };
+    
+    
+    
 
     const logout = async () => {
         setIsLoading(true);
@@ -271,7 +400,11 @@ export const AuthProvider = ({ children }) => {
                 splashLoading,
                 signUp,
                 signIn,
-                logout
+                logout,
+                sendOtp,
+                verifyOtp,
+                forgotPassword,
+                verifyOtpForForgotPassword
             }}>
             {children}
         </AuthContext.Provider>

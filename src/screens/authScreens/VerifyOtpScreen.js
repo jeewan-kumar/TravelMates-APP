@@ -1,34 +1,59 @@
-import React, { useState } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Alert } from 'react-native';
-import Input from '../../components/Input'; // Adjust the path as needed
+import React, { useState, useContext } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View, Alert } from 'react-native';
+import Input from '../../components/Input'; 
 import Button from '../../components/Button';
+import { AuthContext } from '../../services/AuthContext';
+import axios from 'axios';
+
+const BASE_URL = 'http://192.168.33.157:5164/TravelMates_SignIn'; 
 
 const VerifyOtpScreen = ({ route, navigation }) => {
-//   const { emailOrPhone } = route.params;
+  const { user_Id, email, phone_number } = route.params || {}; 
+  const isEmailLogin = email ? true : false;
+  const identifier = isEmailLogin ? email : phone_number;
+  
+  console.log('route', route);
+  console.log('Email or Phone:', identifier);
+  console.log('isEmailLogin:', isEmailLogin);
+  
   const [otp, setOtp] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleVerifyOtp = () => {
-    setIsLoading(true);
-
+  const handleVerifyOtp = async () => {
     if (!otp) {
       Alert.alert('Error', 'Please enter the OTP.');
       setIsLoading(false);
       return;
     }
 
-    // Call your API to verify OTP
-    // console.log('Verifying OTP for:', emailOrPhone);
-    console.log('OTP:', otp);
-    // Example: fetch('https://your-api.com/verify-otp', { method: 'POST', body: JSON.stringify({ emailOrPhone, otp }) })
+    setIsLoading(true);
+    const params = {
+      eventID: "1005",
+      addInfo: {
+        user_id: user_Id,
+        [isEmailLogin ? 'email' : 'phone_number']: identifier,
+        otp
+      }
+    };
 
-    // Simulate success
-    setTimeout(() => {
-      Alert.alert('Success', 'OTP verified successfully.');
+    console.log('verifyOtp OTP with params:', params);
+
+    try {
+      const response = await axios.post(BASE_URL, params);
+      console.log('Verify OTP Response:', response.data);
+
+      if (response.data.rData && response.data.rData.rCode === 1) {
+        Alert.alert('Error', response.data.rData.rMessage || 'Failed to verify OTP.');
+      } else {
+        Alert.alert('Success', 'OTP verified successfully.');
+        navigation.navigate('ResetPasswordScreen', {user_Id, email, phone_number });
+      }
+    } catch (error) {
+      console.error('Error verifying OTP:', error);
+      Alert.alert('Error', 'Failed to verify OTP.');
+    } finally {
       setIsLoading(false);
-      // navigation.navigate('ResetPasswordScreen', { emailOrPhone });
-      navigation.navigate('ResetPasswordScreen');
-    }, 2000);
+    }
   };
 
   return (
