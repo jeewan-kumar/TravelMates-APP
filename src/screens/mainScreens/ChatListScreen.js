@@ -1,106 +1,4 @@
-// import React, { useEffect, useState } from 'react';
-// import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet } from 'react-native';
-// import { useNavigation } from '@react-navigation/native';
-// import axios from 'axios';
 
-// const chatUrl = "http://192.168.33.157:5164/Skillup_Chat"; // Replace with your API endpoint
-
-// export default function ChatListScreen() {
-//   const [chatList, setChatList] = useState([]);
-//   const navigation = useNavigation();
-
-//   useEffect(() => {
-//     getChatList();
-//   }, []);
-
-//   const getChatList = async () => {
-//     try {
-//       const response = await axios.get(chatUrl);
-//       const result = response.data.data.map((item) => ({
-//         id: item.id,
-//         name: item.attributes.name,
-//         lastMessage: item.attributes.lastMessage,
-//         image: item.attributes.image.data.attributes.url,
-//         lastMessageDate: item.attributes.lastMessageDate,
-//       }));
-//       setChatList(result);
-//     } catch (error) {
-//       console.error('Error fetching chat list:', error);
-//     }
-//   };
-
-//   const onPressChat = (chat) => {
-//     navigation.navigate('ChatDetail', { chatData: chat });
-//   };
-
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.title}>Chats</Text>
-//       <FlatList
-//         data={chatList}
-//         keyExtractor={(item) => item.id.toString()}
-//         renderItem={({ item }) => (
-//           <TouchableOpacity
-//             style={styles.chatItem}
-//             onPress={() => onPressChat(item)}
-//           >
-//             <Image
-//               source={{ uri: item.image }}
-//               style={styles.chatImage}
-//             />
-//             <View style={styles.chatContent}>
-//               <Text style={styles.chatName}>{item.name}</Text>
-//               <Text style={styles.chatLastMessage}>{item.lastMessage}</Text>
-//               <Text style={styles.chatDate}>{item.lastMessageDate}</Text>
-//             </View>
-//           </TouchableOpacity>
-//         )}
-//       />
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     padding: 10,
-//     backgroundColor: '#f5f5f5',
-//   },
-//   title: {
-//     fontSize: 24,
-//     fontWeight: 'bold',
-//     marginBottom: 10,
-//   },
-//   chatItem: {
-//     flexDirection: 'row',
-//     backgroundColor: '#fff',
-//     marginBottom: 10,
-//     borderRadius: 10,
-//     overflow: 'hidden',
-//     elevation: 2,
-//   },
-//   chatImage: {
-//     width: 60,
-//     height: 60,
-//     borderRadius: 30,
-//     margin: 10,
-//   },
-//   chatContent: {
-//     flex: 1,
-//     justifyContent: 'center',
-//   },
-//   chatName: {
-//     fontWeight: 'bold',
-//     fontSize: 16,
-//   },
-//   chatLastMessage: {
-//     color: '#888',
-//   },
-//   chatDate: {
-//     fontSize: 12,
-//     color: '#aaa',
-//   },
-// });
 
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet } from 'react-native';
@@ -153,7 +51,7 @@ export default function ChatListScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Chats</Text>
+     
       <FlatList
         data={chatList}
         keyExtractor={(item) => item.id}
@@ -219,3 +117,52 @@ const styles = StyleSheet.create({
     color: '#aaa',
   },
 });
+
+// import { StyleSheet, Text, View, ScrollView } from 'react-native';
+// import React, { useEffect, useState } from 'react';
+// import UserChat from '../../components/UserChat'; // Import the UserChat component
+
+// // Mock data
+// const mockMatches = [
+//   { id: '1', name: 'Alice', lastMessage: 'Hey there!' },
+//   { id: '2', name: 'Bob', lastMessage: 'Looking forward to our trip!' },
+//   { id: '3', name: 'Charlie', lastMessage: 'Can’t wait to meet you!' },
+// ];
+
+// const ChatScreen = () => {
+//   const [matches, setMatches] = useState([]);
+
+//   useEffect(() => {
+//     // Simulate fetching matches with mock data
+//     setMatches(mockMatches);
+//   }, []);
+
+//   return (
+//     <ScrollView style={styles.container}>
+//       <View>
+//         <Text style={styles.header}>Your Matches</Text>
+//         <View style={styles.matchesContainer}>
+//           {matches.map((item) => (
+//             <UserChat key={item.id} item={item} />
+//           ))}
+//         </View>
+//       </View>
+//     </ScrollView>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   container: {
+//     marginTop: 55,
+//     padding: 12,
+//   },
+//   header: {
+//     fontSize: 20,
+//     fontWeight: '500',
+//   },
+//   matchesContainer: {
+//     marginVertical: 12,
+//   },
+// });
+
+// export default ChatScreen;

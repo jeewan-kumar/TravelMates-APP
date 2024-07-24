@@ -4,23 +4,28 @@ import { AuthContext } from '../../services/AuthContext';
 
 const SplashScreen = ({ navigation }) => {
   const { splashLoading, userInfo } = useContext(AuthContext);
+  console.log("AuthContext",AuthContext)
 
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
         if (!splashLoading) {
           setTimeout(() => {
+            console.log('userInfo',userInfo);
             if (userInfo) {
-              const identifier = userInfo.email || userInfo.phone_number;
+              console.log('userInfo',userInfo);
+              const identifier = (userInfo.email || userInfo.phone_number) && (userInfo.otp || userInfo.password);
+              console.log('identifier',identifier);
               navigation.navigate('Home', { identifier });
             } else {
-              navigation.navigate('SignIn');
+              console.log('userInfo',userInfo);
+              navigation.navigate('Welcome');
             }
           }, 1000); 
         }
       } catch (e) {
         console.error('Failed to load auth status', e);
-        navigation.navigate('SignIn');
+        navigation.navigate('Welcome');
       }
     };
 

@@ -1,48 +1,72 @@
-import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+// screens/TravelPlanDetailsScreen.js
+import React, { useState, useEffect } from 'react';
+import { View, ScrollView, StyleSheet, ActivityIndicator, Text } from 'react-native';
+import TravelDetail from '../../components/TravelDetail';
 
-const TravelDetailsScreen = ({ route }) => {
-  const { destination, startDate, endDate } = route.params;
+// Dummy data for demonstration; replace with actual API call
+const dummyTravelPlanDetails = {
+  destination: 'Paris, France',
+  dates: '2024-08-10 to 2024-08-20',
+  description: 'A romantic getaway to the city of lights.',
+  accommodation: 'Hotel de Paris',
+  activities: 'Sightseeing, Wine tasting, Museum tours',
+  travelCompanions: [
+    { name: 'Alice Johnson', role: 'Friend' },
+    { name: 'Bob Smith', role: 'Colleague' },
+  ],
+  budget: '3000 USD',
+  transportation: 'Flight, Public transport',
+};
 
-  const startChat = () => {
-    // Navigate to ChatScreen with destination details
-    // Example: navigation.navigate('Chat', { destination });
-  };
+const TravelPlanDetailsScreen = () => {
+  const [travelPlan, setTravelPlan] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const planGroupTravel = () => {
-    // Navigate to GroupTravelScreen with destination details
-    // Example: navigation.navigate('GroupTravel', { destination });
-  };
+  useEffect(() => {
+    // Replace this with actual API call
+    setTimeout(() => {
+      setTravelPlan(dummyTravelPlanDetails);
+      setLoading(false);
+    }, 1000);
+  }, []);
+
+  if (loading) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{destination}</Text>
-      <Text>Start Date: {startDate}</Text>
-      <Text>End Date: {endDate}</Text>
-      <View style={styles.buttonContainer}>
-        <Button title="Start Chat" onPress={startChat} />
-        <Button title="Plan Group Travel" onPress={planGroupTravel} />
-      </View>
-    </View>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.title}>{travelPlan.destination}</Text>
+      <TravelDetail label="Dates" value={travelPlan.dates} />
+      <TravelDetail label="Description" value={travelPlan.description} />
+      <TravelDetail label="Accommodation" value={travelPlan.accommodation} />
+      <TravelDetail label="Activities" value={travelPlan.activities} />
+      <TravelDetail label="Budget" value={travelPlan.budget} />
+      <TravelDetail label="Transportation" value={travelPlan.transportation} />
+      <Text style={styles.sectionTitle}>Travel Companions:</Text>
+      {travelPlan.travelCompanions.map((companion, index) => (
+        <TravelDetail key={index} label={companion.name} value={companion.role} />
+      ))}
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingHorizontal: 20,
-    paddingTop: 20,
+    padding: 20,
+    backgroundColor: '#f5f5f5',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
   },
-  buttonContainer: {
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
     marginTop: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    marginBottom: 10,
   },
 });
 
-export default TravelDetailsScreen;
+export default TravelPlanDetailsScreen;

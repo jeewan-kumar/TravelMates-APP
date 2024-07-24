@@ -369,7 +369,7 @@ export default SignInScreen;
 //   };
 
 //   const handleResendOtp = async () => {
-//     handleSendOtp(); // Reuse the handleSendOtp function for resending OTP
+//     handleSendOtp();
 //   };
 
 //   const handleSignIn = async () => {
@@ -408,9 +408,9 @@ export default SignInScreen;
 
 //       if (response.data.rData && response.data.rData.rCode === 0) {
 //         Alert.alert('Success', 'Sign in successful.');
-//         setUserInfo(response.data); // Store user info in context
+//         setUserInfo(response.data); 
 //         await AsyncStorage.setItem('userInfo', JSON.stringify(response.data)); // Save user info to AsyncStorage
-//         navigation.navigate('Home'); // Adjust navigation as needed
+//         navigation.navigate('Home'); 
 //       } else {
 //         Alert.alert('Error', response.data.rData.rMessage || 'Sign in failed.');
 //       }
