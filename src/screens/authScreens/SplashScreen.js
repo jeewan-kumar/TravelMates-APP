@@ -4,21 +4,21 @@ import { AuthContext } from '../../services/AuthContext';
 
 const SplashScreen = ({ navigation }) => {
   const { splashLoading, userInfo } = useContext(AuthContext);
-  console.log("AuthContext",AuthContext)
+  // console.log("AuthContext",AuthContext)
 
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
         if (!splashLoading) {
           setTimeout(() => {
-            console.log('userInfo',userInfo);
+            // console.log('userInfo',userInfo);
             if (userInfo) {
-              console.log('userInfo',userInfo);
-              const identifier = (userInfo.email || userInfo.phone_number) && (userInfo.otp || userInfo.password);
-              console.log('identifier',identifier);
+              // console.log('splace userinfo',userInfo.rData.token);
+              const identifier = userInfo.rData.token;
+              // console.log('identifier',identifier);
               navigation.navigate('Home', { identifier });
             } else {
-              console.log('userInfo',userInfo);
+              // console.log('userInfo',userInfo);
               navigation.navigate('Welcome');
             }
           }, 1000); 

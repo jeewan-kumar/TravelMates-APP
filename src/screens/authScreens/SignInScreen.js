@@ -130,7 +130,7 @@ const SignInScreen = ({ navigation }) => {
 
         <Input
           id="emailOrPhone"
-          placeholder="Email or Phone Number"
+          placeholder="Email or Phone NO"
           placeholderTextColor="white"
           leftIcon="user"
           onInputChanged={(id, text) => setEmailOrPhone(text)}

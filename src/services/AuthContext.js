@@ -1,5 +1,4 @@
 
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
@@ -12,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     const [splashLoading, setSplashLoading] = useState(true);
     const BASE_URL = "http://192.168.33.157:5164/";
 
-    const signUp = async (fullName, email, phoneNumber, dateOfBirth, password) => {
+    const signUp = async ({ fullName, email, phoneNumber, dateOfBirth, password }) => {
         setIsLoading(true);
         const params = {
             eventID: "1001",
@@ -65,6 +64,7 @@ export const AuthProvider = ({ children }) => {
             setUserInfo(userInfo);
             await AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
             setIsLoading(false);
+            console.log("userinfo singin",userInfo);
             return { success: true };
         } catch (error) {
             console.error(`Sign in failed: ${error}`);
@@ -147,19 +147,19 @@ export const AuthProvider = ({ children }) => {
             console.log('Sending OTP with params:', params);
             const response = await axios.post(`${BASE_URL}TravelMates_SignIn`, params);
             console.log('sendOtp Response:', response.data);
-           
+
             const userInfo = response.data;
 
             if (userInfo.rData && userInfo.rData.rCode === 1) {
                 setIsLoading(false);
-                
+
                 return { success: false, message: userInfo.rData.rMessage };
             }
 
             setUserInfo(userInfo);
             await AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
             setIsLoading(false);
-            return { success: true , user_Id: userInfo.rData.user_Id };
+            return { success: true, user_Id: userInfo.rData.user_Id };
         } catch (error) {
             console.error(`Error sending OTP: ${error}`);
             setIsLoading(false);
@@ -196,9 +196,9 @@ export const AuthProvider = ({ children }) => {
             return { success: false, message: error.message };
         }
     };
-    
-    
-    
+
+
+
 
     const logout = async () => {
         setIsLoading(true);
