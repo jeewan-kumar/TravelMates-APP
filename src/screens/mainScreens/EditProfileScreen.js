@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ScrollView, ActivityIndicator, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker';
+import ProfilePicture from '../../components/ProfilePicture';
 
 const EditProfileScreen = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +23,8 @@ const EditProfileScreen = () => {
     profile_picture: '',
   });
   const [loading, setLoading] = useState(false);
+  const [base64Image, setBase64Image] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
   const navigation = useNavigation();
 
   const fetchUserProfile = useCallback(async () => {
@@ -55,10 +58,10 @@ const EditProfileScreen = () => {
       const jsonResponse = await response.json();
       if (jsonResponse.rStatus === 0 && jsonResponse.rData && jsonResponse.rData.lessons) {
         const userArray = jsonResponse.rData.lessons[0];
-        if (userArray[0] && userArray.length > 0) {
+        if (userArray && userArray.length > 0) {
           const travelPreferencesArray = userArray[0][13] ? JSON.parse(userArray[0][13]) : [];
           const travelTypesArray = userArray[0][14] ? JSON.parse(userArray[0][14]) : [];
-          const travelingintentionsArray = userArray[0][15] ? JSON.parse(userArray[0][15]) : [];
+          const travelingIntentionsArray = userArray[0][15] ? JSON.parse(userArray[0][15]) : [];
           const interestsArray = userArray[0][30] ? JSON.parse(userArray[0][30]) : [];
 
           setFormData({
@@ -66,17 +69,18 @@ const EditProfileScreen = () => {
             date_of_birth: userArray[0][4] || '',
             location: userArray[0][10] || '',
             gender: userArray[0][11] || '',
-            travel_preferences: travelPreferencesArray || [],
-            travel_types: travelTypesArray || [],
-            traveling_intentions: travelingintentionsArray || [],
+            travel_preferences: travelPreferencesArray,
+            travel_types: travelTypesArray,
+            traveling_intentions: travelingIntentionsArray,
             job_title: userArray[0][18] || '',
             workplace: userArray[0][19] || '',
             education: userArray[0][20] || '',
             religious_beliefs: userArray[0][22] || '',
-            interests: interestsArray || [],
+            interests: interestsArray,
             bio: userArray[0][33] || '',
             profile_picture: userArray[0][9] || '',
           });
+          setBase64Image(userArray[0][9] || '');
         } else {
           console.error('No user data found in profile array');
         }
@@ -120,9 +124,8 @@ const EditProfileScreen = () => {
 
       const jsonResponse = await response.json();
       if (jsonResponse.rStatus === 0) {
-        // Successfully updated
         console.log('Profile updated successfully');
-        navigation.goBack();  // Navigate back to the previous screen
+        navigation.goBack();
       } else {
         console.error('Failed to update profile');
       }
@@ -131,6 +134,20 @@ const EditProfileScreen = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleChooseImage = () => {
+    launchImageLibrary({ mediaType: 'photo' }, (response) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.error('ImagePicker Error: ', response.error);
+      } else {
+        const base64 = response.assets[0].base64;
+        setBase64Image(base64);
+        setFormData({ ...formData, profile_picture: base64 });
+      }
+    });
   };
 
   if (loading) {
@@ -143,6 +160,16 @@ const EditProfileScreen = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.label}>Profile Picture</Text>
+      <ProfilePicture/>
+      <View style={styles.profileCard}>
+        {base64Image ? (
+          <Image style={styles.image} source={{ uri: `data:image/jpeg;base64,${base64Image}` }} />
+        ) : (
+          <Text>No profile picture</Text>
+        )}
+        <Button title="Choose New Image" onPress={handleChooseImage} />
+      </View>
       <Text style={styles.label}>Full Name</Text>
       <TextInput
         style={styles.input}
@@ -221,13 +248,7 @@ const EditProfileScreen = () => {
         value={formData.bio}
         onChangeText={(text) => setFormData({ ...formData, bio: text })}
       />
-      <Text style={styles.label}>Profile Picture</Text>
-      <TextInput
-        style={styles.input}
-        value={formData.profile_picture}
-        onChangeText={(text) => setFormData({ ...formData, profile_picture: text })}
-      />
-      <Button title="Update Profile" onPress={handleUpdateProfile} />
+      <Button title="Save" onPress={handleUpdateProfile} />
     </ScrollView>
   );
 };
@@ -235,25 +256,33 @@ const EditProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: '#f5f5f5',
+  },
+  label: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 20,
   },
   loaderContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  label: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginVertical: 5,
+  profileCard: {
+    marginBottom: 20,
+    alignItems: 'center',
   },
-  input: {
-    borderColor: '#ccc',
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 15,
-    backgroundColor: '#fff',
+  image: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 10,
   },
 });
 
