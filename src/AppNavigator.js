@@ -40,6 +40,7 @@ import MatchScreen from './screens/mainScreens/MatchesScreen';
 import SendLikeScreen from './screens/mainScreens/SendLikeScreen';
 import ChatRoom from './screens/mainScreens/ChatRoom';
 import TravelPlanDetailsScreen from './screens/mainScreens/TravelDetailsScreen';
+import SignUpForm from './screens/authScreens/SignUpForm';
 
 // Create navigators
 const Stack = createStackNavigator();
@@ -147,6 +148,7 @@ const MainStackNavigator = () => (
     <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} />
     <Stack.Screen name="VerifyOtpScreen" component={VerifyOtpScreen} />
     <Stack.Screen name="VerificationScreen" component={VerificationScreen} />
+    <Stack.Screen name="SignUpForm" component={SignUpForm} />
     <Stack.Screen name="SignInwithOtp" component={SignInwithOtp} />
     <Stack.Screen name="Home" component={TabNavigator} />
     <Stack.Screen name="SendLike" component={SendLikeScreen} />
@@ -163,6 +165,7 @@ const MainStackNavigator = () => (
     <Stack.Screen name="ChatDetailScreen" component={ChatDetailScreen} />
     <Stack.Screen name="TravelPlanDetailsScreen" component={TravelPlanDetailsScreen} />
     <Stack.Screen name="UserProfileDetails" component={UserProfileDetails} />
+    {/* <Stack.Screen name="SignUpForm" component={SignUpForm} /> */}
 
   </Stack.Navigator>
 );

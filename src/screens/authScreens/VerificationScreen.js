@@ -35,7 +35,8 @@ const VerificationScreen = ({ route, navigation }) => {
       console.log('VerifyOTP Response:', response.data); 
       if (response.data.rStatus === 0 && response.data.rData.rCode === 0) {
         Alert.alert('Success', response.data.rData.rMessage);
-        navigation.navigate('Home');
+        navigation.navigate('SignUpForm');
+        // navigation.navigate('Home');
       } else {
         Alert.alert('Error', response.data.rData.rMessage);
       }

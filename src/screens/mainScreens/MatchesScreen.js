@@ -88,7 +88,7 @@ const MatchScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#2f4f4f',
     padding: 16,
   },
   searchInput: {

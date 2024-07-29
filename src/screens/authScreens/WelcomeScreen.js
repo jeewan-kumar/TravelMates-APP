@@ -34,6 +34,7 @@ const WelcomeScreen = ({ navigation }) => {
               Don’t have an account?
             </Text>
             <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+            {/* <TouchableOpacity onPress={() => navigation.navigate("SignUpForm")}> */}
               <Text style={styles.bottomLink}>
                 Sign Up
               </Text>

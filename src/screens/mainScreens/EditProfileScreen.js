@@ -161,7 +161,7 @@ const EditProfileScreen = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.label}>Profile Picture</Text>
-      <ProfilePicture/>
+      {/* <ProfilePicture/> */}
       <View style={styles.profileCard}>
         {base64Image ? (
           <Image style={styles.image} source={{ uri: `data:image/jpeg;base64,${base64Image}` }} />

@@ -8,16 +8,35 @@ import UserCard from '../../components/UserCard';
 const dummyTravelPlans = [
   {
     id: 1,
-    destination: 'Paris, France',
+    destination: 'Delhi',
     dates: '2024-08-10 to 2024-08-20',
     description: 'A romantic getaway to the city of lights.',
   },
   {
     id: 2,
-    destination: 'Kyoto, Japan',
+    destination: 'Gurugram',
     dates: '2024-09-15 to 2024-09-25',
     description: 'Exploring the historic temples and gardens.',
   },
+  {
+    id: 3,
+    destination: 'Bihar',
+    dates: '2024-09-15 to 2024-09-25',
+    description: 'Exploring the historic temples and gardens.',
+  },
+  {
+    id: 4,
+    destination: 'Noida',
+    dates: '2024-09-15 to 2024-09-25',
+    description: 'Exploring the historic temples and gardens.',
+  },
+  {
+    id: 5,
+    destination: 'Noida',
+    dates: '2024-09-15 to 2024-09-25',
+    description: 'Exploring the historic temples and gardens.',
+  },
+  
 ];
 
 const dummyUsers = [
@@ -80,7 +99,7 @@ const TravelPlanScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#2f4f4f' 
   },
 });
 
