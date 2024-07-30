@@ -137,17 +137,24 @@ const EditProfileScreen = () => {
   };
 
   const handleChooseImage = () => {
-    launchImageLibrary({ mediaType: 'photo' }, (response) => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.error('ImagePicker Error: ', response.error);
-      } else {
-        const base64 = response.assets[0].base64;
-        setBase64Image(base64);
-        setFormData({ ...formData, profile_picture: base64 });
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+        includeBase64: true, 
+        maxWidth: 300, 
+        maxHeight: 300, 
+      },
+      (response) => {
+        if (response.didCancel) {
+          console.log('User cancelled image picker');
+        } else if (response.errorMessage) {
+          console.error('ImagePicker Error: ', response.errorMessage);
+        } else if (response.assets && response.assets.length > 0) {
+          const selectedImage = response.assets[0];
+          setBase64Image(selectedImage.base64);
+        }
       }
-    });
+    );
   };
 
   if (loading) {
@@ -161,12 +168,12 @@ const EditProfileScreen = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.label}>Profile Picture</Text>
-      {/* <ProfilePicture/> */}
+      
       <View style={styles.profileCard}>
         {base64Image ? (
           <Image style={styles.image} source={{ uri: `data:image/jpeg;base64,${base64Image}` }} />
         ) : (
-          <Text>No profile picture</Text>
+          <Text style={styles.noPictureText}>No profile picture</Text>
         )}
         <Button title="Choose New Image" onPress={handleChooseImage} />
       </View>
@@ -261,6 +268,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
+    alignItems: "center"
   },
   input: {
     borderWidth: 1,
@@ -283,6 +291,11 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 50,
     marginBottom: 10,
+  },
+  noPictureText: {
+    textAlign: 'center',
+    fontSize: 14,
+    color: '#888',
   },
 });
 
